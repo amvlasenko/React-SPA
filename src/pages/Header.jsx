@@ -1,20 +1,20 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <nav>
-      <div class='nav-wrapper  blue-grey darken-3'>
-        <a href='#' class='brand-logo right'>
+      <div className="nav-wrapper  blue-grey darken-3">
+        <a href="./about" className="brand-logo right">
           React-SPA
         </a>
-        <ul id='nav-mobile' class='left hide-on-med-and-down'>
+        <ul id="nav-mobile" className="left hide-on-med-and-down">
           <li>
-            <Link to='/'>Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to='/about'>About</Link>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to='/contacts'>Contact</Link>
+            <Link to="/contacts">Contact</Link>
           </li>
         </ul>
       </div>

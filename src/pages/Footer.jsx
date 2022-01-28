@@ -1,12 +1,12 @@
 function Footer() {
   return (
-    <footer class='page-footer  blue-grey darken-2'>
-      <div class='footer-copyright  blue-grey darken-3'>
-        <div class='container'>
+    <footer className="page-footer  blue-grey darken-2">
+      <div className="footer-copyright  blue-grey darken-3">
+        <div className="container">
           © 2021 amvlasenko
           <a
-            class='grey-text text-lighten-4 right'
-            href='https://github.com/amvlasenko'
+            className="grey-text text-lighten-4 right"
+            href="https://github.com/amvlasenko"
           >
             On GitHub
           </a>
