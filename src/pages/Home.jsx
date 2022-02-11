@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PostForm from "../Components/PostForm";
 import Posts from "../Components/Posts";
 import MyInput from "../Components/UI/MyInput/MyInput";
@@ -10,11 +10,29 @@ function Home() {
     { id: 2, title: "Second post", description: "11 description" },
     { id: 3, title: "Thrid post", description: "55 description" },
   ]);
-  const [selectedValue, setSelectedValue] = useState("title");
+  const [selectedValue, setSelectedValue] = useState("");
   const [sortOptions, setSortOptions] = useState([
     { value: "title", name: "По названию" },
     { value: "description", name: "По содержанию" },
   ]);
+  const [searchValue, setSearchValue] = useState("");
+
+  const getSortedPosts = () => {
+    console.log("getSortedPosts rabotaem");
+    if (selectedValue) {
+      return [...postsList].sort((a, b) =>
+        a[selectedValue].localeCompare(b[selectedValue])
+      );
+    }
+    return postsList;
+  };
+
+  const sortedPosts = useMemo(() => getSortedPosts());
+  // const searchedPosts = useMemo(() => {
+  //   return sortedPosts.filter((post) =>
+  //     post.title.toLowerCase().includes(searchValue.toLowerCase())
+  //   );
+  // }, [searchValue]);
 
   const addPost = (newPost) => {
     setPostsList([...postsList, newPost]);
@@ -26,10 +44,6 @@ function Home() {
 
   const sortPosts = (sortBy) => {
     setSelectedValue(sortBy);
-
-    setPostsList(
-      [...postsList].sort((a, b) => a[sortBy].localeCompare(b[sortBy]))
-    );
   };
 
   return (
@@ -43,7 +57,11 @@ function Home() {
     >
       <span>Its Home</span>
       <PostForm create={addPost} />
-      <MyInput placeholder="Поиск..." />
+      <MyInput
+        placeholder="Поиск..."
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
       <MySort
         value={selectedValue}
         defaultValue="По умолчанию"
@@ -51,7 +69,7 @@ function Home() {
         onChange={sortPosts}
       />
       {postsList.length !== 0 ? (
-        <Posts postsList={postsList} removePost={removePost} />
+        <Posts postsList={sortedPosts} removePost={removePost} />
       ) : (
         <>
           <span>Постов нет</span>
