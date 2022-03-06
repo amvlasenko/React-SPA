@@ -1,5 +1,3 @@
-import classes from "./MySort.module.css";
-
 function MySort(props) {
   return (
     <>

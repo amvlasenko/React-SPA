@@ -3,12 +3,17 @@ import MyButton from "./UI/MyButton/MyButton";
 import { useState } from "react";
 
 function PostForm({ create }) {
-  const [post, setPost] = useState({ id: 0, title: "", description: "" });
+  const [post, setPost] = useState({
+    title: "",
+    description: "",
+  });
 
+  console.log();
   const addNewPost = (e) => {
     e.preventDefault();
-    create(post);
-    setPost({ id: 0, title: "", description: "" });
+    const newPost = { ...post, id: Date.now() };
+    create(newPost);
+    setPost({ title: "", description: "" });
   };
 
   return (
