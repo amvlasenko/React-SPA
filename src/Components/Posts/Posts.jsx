@@ -1,14 +1,14 @@
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import MyButton from "../UI/MyButton/MyButton";
-import "./posts.css";
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import MyButton from '../UI/MyButton/MyButton';
+import './posts.css';
 
 function Posts(props) {
    if (!props.postsList.length) {
       return (
          <>
             <span>Постов нет</span>
-            <div class='progress'>
-               <div class='indeterminate'></div>
+            <div className='progress'>
+               <div className='indeterminate'></div>
             </div>
          </>
       );
@@ -20,17 +20,23 @@ function Posts(props) {
             <TransitionGroup>
                {props.postsList.map((post) => (
                   <CSSTransition key={post.id} timeout={500} classNames='post'>
-                     <li className='card horizontal row'>
-                        <span className='card-title col s2'>{post.title}</span>
-                        <div className='card-stacked'>
-                           <p className='card-content'>{post.description}</p>
-                           <div className='card-action'>
-                              <MyButton
-                                 style={{ bacgroundColor: "white" }}
-                                 onClick={() => props.removePost(post)}
-                              >
-                                 Удалить
-                              </MyButton>
+                     <li className='row'>
+                        <div className='col s12 m6'>
+                           <div className='card blue-grey darken-1'>
+                              <div className='card-content white-text'>
+                                 <span className='card-title'>
+                                    {post.id}. {post.title}
+                                 </span>
+                                 <p>{post.body}</p>
+                              </div>
+                              <div className='card-action'>
+                                 <MyButton
+                                    style={{ bacgroundColor: 'white' }}
+                                    onClick={() => props.removePost(post)}
+                                 >
+                                    Удалить
+                                 </MyButton>
+                              </div>
                            </div>
                         </div>
                      </li>
