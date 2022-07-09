@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 
 export const usePagination = (totalPages) => {
    function getResult(totalPages) {
@@ -8,6 +8,7 @@ export const usePagination = (totalPages) => {
       }
       return result;
    }
+
    const pagination = useMemo(() => getResult(totalPages), [totalPages]);
 
    return pagination;

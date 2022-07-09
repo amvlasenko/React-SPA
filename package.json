@@ -2,6 +2,7 @@
   "name": "react-spa",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://amvlasenko.github.io/React-SPA",
   "dependencies": {
     "axios": "^0.26.0",
     "materialize-css": "^1.0.0-rc.2",

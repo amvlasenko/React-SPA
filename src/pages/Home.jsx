@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import PostsService from '../API/PostsService';
 import PostForm from '../Components/PostForm';
 import Posts from '../Components/Posts/Posts';
@@ -8,12 +8,12 @@ import MyLoader from '../Components/UI/MyLoader/MyLoader';
 import MyModal from '../Components/UI/MyModal/MyModal';
 import MyPagination from '../Components/UI/MyPagination/MyPagination';
 import useFetching from '../hooks/useFetching';
-import { usePosts } from '../hooks/usePosts';
-import { getPagesCount } from '../utils/pages';
+import {usePosts} from '../hooks/usePosts';
+import {getPagesCount} from '../utils/pages';
 
 function Home() {
    const [postsList, setPostsList] = useState([]);
-   const [filter, setFilter] = useState({ sort: '', query: '' });
+   const [filter, setFilter] = useState({sort: '', query: ''});
    const [modal, setModal] = useState(false);
    const [totalPages, setTotalPages] = useState(0);
    const [limit, setLimit] = useState(10);
@@ -54,19 +54,19 @@ function Home() {
          }}
       >
          <span>Its Home</span>
-         <MyButton style={{ width: '150px' }} onClick={() => setModal(true)}>
+         <MyButton style={{width: '150px'}} onClick={() => setModal(true)}>
             Создать пост
          </MyButton>
          <MyModal visible={modal} setVisible={setModal}>
-            <PostForm create={addPost} />
+            <PostForm create={addPost}/>
          </MyModal>
-         <MyPagination totalPages={totalPages} page={page} setPage={setPage} />
-         <PostsFilter filter={filter} setFilter={setFilter} />
+         <MyPagination totalPages={totalPages} page={page} setPage={setPage}/>
+         <PostsFilter filter={filter} setFilter={setFilter}/>
          {postsError && <h1>Произошла обшибка {postsError}</h1>}
          {isLoading ? (
-            <MyLoader />
+            <MyLoader/>
          ) : (
-            <Posts postsList={sortedAndSearchedPosts} removePost={removePost} />
+            <Posts postsList={sortedAndSearchedPosts} removePost={removePost}/>
          )}
       </div>
    );

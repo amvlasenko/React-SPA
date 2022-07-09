@@ -1,4 +1,4 @@
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import MyButton from '../UI/MyButton/MyButton';
 import './posts.css';
 
@@ -7,8 +7,8 @@ function Posts(props) {
       return (
          <>
             <span>Постов нет</span>
-            <div className='progress'>
-               <div className='indeterminate'></div>
+            <div className="progress">
+               <div className="indeterminate"></div>
             </div>
          </>
       );
@@ -19,19 +19,19 @@ function Posts(props) {
          <ul>
             <TransitionGroup>
                {props.postsList.map((post) => (
-                  <CSSTransition key={post.id} timeout={500} classNames='post'>
-                     <li className='row'>
-                        <div className='col s12 m6'>
-                           <div className='card blue-grey darken-1'>
-                              <div className='card-content white-text'>
-                                 <span className='card-title'>
+                  <CSSTransition key={post.id} timeout={500} classNames="post">
+                     <li className="row">
+                        <div className="col s12 m6">
+                           <div className="card blue-grey darken-1">
+                              <div className="card-content white-text">
+                                 <span className="card-title">
                                     {post.id}. {post.title}
                                  </span>
                                  <p>{post.body}</p>
                               </div>
-                              <div className='card-action'>
+                              <div className="card-action">
                                  <MyButton
-                                    style={{ bacgroundColor: 'white' }}
+                                    style={{bacgroundColor: 'white'}}
                                     onClick={() => props.removePost(post)}
                                  >
                                     Удалить

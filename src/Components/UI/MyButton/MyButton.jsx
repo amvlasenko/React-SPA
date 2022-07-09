@@ -1,5 +1,6 @@
 import classes from './MyButton.module.css';
-function MyButton({ children, ...props }) {
+
+function MyButton({children, ...props}) {
    return (
       <button
          {...props}

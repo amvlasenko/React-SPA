@@ -1,21 +1,21 @@
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 #root {
-   display: flex;
-   min-height: 100vh;
-   flex-direction: column;
-   background-color: white;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: white;
 }
 
 main {
-   flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 .pagination li {
-   margin-top: 5px;
-   margin-right: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
 }
