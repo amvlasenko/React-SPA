@@ -8,7 +8,6 @@ function PostForm({create}) {
       body: '',
    });
 
-   console.log();
    const addNewPost = (e) => {
       e.preventDefault();
       const newPost = {...post, id: Date.now()};

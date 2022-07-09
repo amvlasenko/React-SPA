@@ -1,8 +1,11 @@
 import {TransitionGroup, CSSTransition} from 'react-transition-group';
 import MyButton from '../UI/MyButton/MyButton';
 import './posts.css';
+import {useHistory} from 'react-router-dom';
 
 function Posts(props) {
+   const router = useHistory();
+
    if (!props.postsList.length) {
       return (
          <>
@@ -21,7 +24,7 @@ function Posts(props) {
                {props.postsList.map((post) => (
                   <CSSTransition key={post.id} timeout={500} classNames="post">
                      <li className="row">
-                        <div className="col s12 m6">
+                        <div className="col s12 m8">
                            <div className="card blue-grey darken-1">
                               <div className="card-content white-text">
                                  <span className="card-title">
@@ -31,7 +34,12 @@ function Posts(props) {
                               </div>
                               <div className="card-action">
                                  <MyButton
-                                    style={{bacgroundColor: 'white'}}
+                                    style={{margin: '10px'}}
+                                    onClick={() => router.push(`/post/${post.id}`)}
+                                 >
+                                    Открыть
+                                 </MyButton>
+                                 <MyButton
                                     onClick={() => props.removePost(post)}
                                  >
                                     Удалить

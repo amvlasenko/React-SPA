@@ -1,31 +1,46 @@
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import Header from './pages/Header';
 import Footer from './pages/Footer';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import About from './pages/About';
+import {privatRoutes, publicRoutes} from './router/router';
+import {useState} from 'react';
+import {AuthContext} from './context/context';
+import 'materialize-css/dist/css/materialize.min.css';
 
 function App() {
-   return (
-      <Router>
-         <>
+   const [isAuth, setIsAuth] = useState(false);
+   return (<AuthContext.Provider value={{
+         isAuth,
+         setIsAuth
+      }}>
+         <Router>
             <Header/>
             <main>
-               <Switch>
-                  <Route path="/about">
-                     <About/>
-                  </Route>
-                  <Route path="/contacts">
-                     <Contact/>
-                  </Route>
-                  <Route path="/">
-                     <Home/>
-                  </Route>
-               </Switch>
+               {isAuth
+                  ? <Switch>
+                     {privatRoutes.map(route =>
+                        <Route
+                           component={route.component}
+                           path={route.path}
+                           exact={route.exact}
+                        />
+                     )}
+                     <Redirect to="/home"/>
+                  </Switch>
+                  : <Switch>
+                     {publicRoutes.map(route =>
+                        <Route
+                           component={route.component}
+                           path={route.path}
+                           exact={route.exact}
+                        />
+                     )}
+                     <Redirect to="/login"/>
+                  </Switch>
+               }
             </main>
             <Footer/>
-         </>
-      </Router>
+         </Router>
+      </AuthContext.Provider>
    );
 }
 
