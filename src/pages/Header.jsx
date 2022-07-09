@@ -5,7 +5,7 @@ function Header() {
       <nav>
          <div className="nav-wrapper  blue-grey darken-3">
             <a href="./about" className="brand-logo right">
-               React-SPA
+               react-spa
             </a>
             <ul id="nav-mobile" className="left hide-on-med-and-down">
                <li>
