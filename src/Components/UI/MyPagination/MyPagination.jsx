@@ -1,5 +1,4 @@
 import {usePagination} from '../../../hooks/usePagination';
-import classes from './MyPagination.module.css';
 
 function MyPagination({totalPages, page, setPage}) {
    let pagesArray = usePagination(totalPages);

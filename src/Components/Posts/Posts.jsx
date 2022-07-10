@@ -1,4 +1,4 @@
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import MyButton from '../UI/MyButton/MyButton';
 import './posts.css';
 import {useHistory} from 'react-router-dom';

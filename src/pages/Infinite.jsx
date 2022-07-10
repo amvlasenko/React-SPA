@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import PostsService from '../API/PostsService';
 import PostForm from '../Components/PostForm';
 import Posts from '../Components/Posts/Posts';
@@ -6,26 +6,40 @@ import PostsFilter from '../Components/PostsFilter';
 import MyButton from '../Components/UI/MyButton/MyButton';
 import MyLoader from '../Components/UI/MyLoader/MyLoader';
 import MyModal from '../Components/UI/MyModal/MyModal';
-import MyPagination from '../Components/UI/MyPagination/MyPagination';
 import useFetching from '../hooks/useFetching';
 import {usePosts} from '../hooks/usePosts';
 import {getPagesCount} from '../utils/pages';
 
-function Home() {
+function Infinite() {
    const [postsList, setPostsList] = useState([]);
    const [filter, setFilter] = useState({sort: '', query: ''});
    const [modal, setModal] = useState(false);
    const [totalPages, setTotalPages] = useState(0);
    const [limit, setLimit] = useState(10);
    const [page, setPage] = useState(1);
+   const lastElem = useRef();
+   const observer = useRef();
+
    const [fetchPosts, isLoading, postsError] = useFetching(async () => {
       const response = await PostsService.getAll(limit, page);
-      setPostsList(response.data);
+      setPostsList([...postsList, ...response.data]);
       const totalCount = response.headers['x-total-count'];
       setTotalPages(getPagesCount(totalCount, limit));
    });
 
-   useEffect(() => fetchPosts(), []);
+   useEffect(() => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      let callback = function (entries, observer) {
+         entries.forEach(function (entry) {
+            if (entry.isIntersecting && page < totalPages) {
+               setPage(page + 1);
+            }
+         });
+      };
+      observer.current = new IntersectionObserver(callback);
+      observer.current.observe(lastElem.current);
+   }, [isLoading]);
 
    const sortedAndSearchedPosts = usePosts(
       postsList,
@@ -53,23 +67,22 @@ function Home() {
             textAlign: 'left',
          }}
       >
-         <span>Its Home</span>
+         <span>Its Infinite</span>
          <MyButton style={{width: '150px'}} onClick={() => setModal(true)}>
             Создать пост
          </MyButton>
          <MyModal visible={modal} setVisible={setModal}>
             <PostForm create={addPost}/>
          </MyModal>
-         <MyPagination totalPages={totalPages} page={page} setPage={setPage}/>
          <PostsFilter filter={filter} setFilter={setFilter}/>
          {postsError && <h1>Произошла обшибка {postsError}</h1>}
-         {isLoading ? (
+         <Posts postsList={sortedAndSearchedPosts} removePost={removePost}/>
+         <div ref={lastElem} style={{height: '10px'}}/>
+         {isLoading &&
             <MyLoader/>
-         ) : (
-            <Posts postsList={sortedAndSearchedPosts} removePost={removePost}/>
-         )}
+         }
       </div>
    );
 }
 
-export default Home;
+export default Infinite;

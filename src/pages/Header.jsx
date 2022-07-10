@@ -1,28 +1,48 @@
-import {Link} from 'react-router-dom';
-import {useContext, useEffect, useState} from 'react';
+import {Link, useHistory} from 'react-router-dom';
+import {useContext, useEffect} from 'react';
 import {AuthContext} from '../context/context';
 import M from 'materialize-css';
+import MyButton from '../Components/UI/MyButton/MyButton';
+import MyLoader from '../Components/UI/MyLoader/MyLoader';
 
 function Header() {
-   const {isAuth, setIsAuth} = useContext(AuthContext);
-   const [location, setLocation] = useState({});
+   const history = useHistory();
+   const {isAuth, setIsAuth, isLoading} = useContext(AuthContext);
    let elems;
    let instances;
+
    useEffect(() => {
       elems = document.querySelectorAll('.sidenav');
       instances = M.Sidenav.init(elems);
    }, []);
+
    useEffect(() => {
       elems = document.querySelectorAll('.sidenav');
       instances = M.Sidenav.init(elems);
    }, [isAuth]);
+
+   const logout = (event) => {
+      event.preventDefault();
+      setIsAuth(false);
+      localStorage.setItem('auth', 'false');
+      history.push('/login');
+      elems = document.querySelectorAll('.sidenav');
+      instances = M.Sidenav.init(elems);
+   };
+
+   if (isLoading) {
+      return <MyLoader></MyLoader>;
+   }
+
    return (isAuth
       ? <>
          <nav>
             <div className="nav-wrapper  blue-grey darken-3">
-               <a href="/home" className="brand-logo right">
-                  react-spa
-               </a>
+               <div className="right brand-logo">
+                  <div className="hide-on-med-and-down" style={{marginRight: '10px', display: 'inline-block'}}>
+                     <MyButton onClick={(event) => logout(event)}>Logout</MyButton></div>
+                  <Link to="/home">react-spa</Link>
+               </div>
                <a href="#" data-target="mobile-demo" className="sidenav-trigger">
                   <i className="material-icons">menu</i>
                </a>
@@ -31,7 +51,7 @@ function Header() {
                      <Link to="/home">Home</Link>
                   </li>
                   <li>
-                     <Link to="/about">About</Link>
+                     <Link to="/infinite">Infinite</Link>
                   </li>
                   <li>
                      <Link to="/contacts">Contact</Link>
@@ -44,10 +64,13 @@ function Header() {
                <Link to="/home">Home</Link>
             </li>
             <li>
-               <Link to="/about">About</Link>
+               <Link to="/infinite">Infinite</Link>
             </li>
             <li>
                <Link to="/contacts">Contact</Link>
+            </li>
+            <li>
+               <a href="#" style={{textDecoration: 'underline'}} onClick={(event) => logout(event)}>Logout</a>
             </li>
          </ul>
       </>

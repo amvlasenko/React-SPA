@@ -4,7 +4,7 @@ function MyButton({children, ...props}) {
    return (
       <button
          {...props}
-         className={`waves-effect waves-light btn ${classes.MyButton}`}
+         className={`btn ${classes.MyButton}`}
       >
          {children}
       </button>
