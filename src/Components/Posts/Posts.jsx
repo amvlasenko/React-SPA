@@ -35,7 +35,7 @@ function Posts(props) {
                               <div className="card-action">
                                  <MyButton
                                     style={{margin: '10px'}}
-                                    onClick={() => router.push(`/post/${post.id}`)}
+                                    onClick={() => router.push(`/react-spa/post/${post.id}`)}
                                  >
                                     Открыть
                                  </MyButton>

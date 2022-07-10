@@ -39,7 +39,7 @@ function App() {
                            key={route.path}
                         />
                      )}
-                     <Redirect to="/home"/>
+                     <Redirect to="/react-spa/home"/>
                   </Switch>
                   : <Switch>
                      {publicRoutes.map(route =>
@@ -50,7 +50,7 @@ function App() {
                            key={route.path}
                         />
                      )}
-                     <Redirect to="/login"/>
+                     <Redirect to="/react-spa/login"/>
                   </Switch>
                }
             </main>

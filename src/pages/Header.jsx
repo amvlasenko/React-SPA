@@ -25,7 +25,7 @@ function Header() {
       event.preventDefault();
       setIsAuth(false);
       localStorage.setItem('auth', 'false');
-      history.push('/login');
+      history.push('/react-spa/login');
       elems = document.querySelectorAll('.sidenav');
       instances = M.Sidenav.init(elems);
    };
@@ -41,33 +41,33 @@ function Header() {
                <div className="right brand-logo">
                   <div className="hide-on-med-and-down" style={{marginRight: '10px', display: 'inline-block'}}>
                      <MyButton onClick={(event) => logout(event)}>Logout</MyButton></div>
-                  <Link to="/home">react-spa</Link>
+                  <Link to="/react-spa/home">react-spa</Link>
                </div>
                <a href="#" data-target="mobile-demo" className="sidenav-trigger">
                   <i className="material-icons">menu</i>
                </a>
                <ul className="left hide-on-med-and-down">
                   <li>
-                     <Link to="/home">Home</Link>
+                     <Link to="/react-spa/home">Home</Link>
                   </li>
                   <li>
-                     <Link to="/infinite">Infinite</Link>
+                     <Link to="/react-spa/infinite">Infinite</Link>
                   </li>
                   <li>
-                     <Link to="/contacts">Contact</Link>
+                     <Link to="/react-spa/contacts">Contact</Link>
                   </li>
                </ul>
             </div>
          </nav>
          <ul id="mobile-demo" className="sidenav">
             <li>
-               <Link to="/home">Home</Link>
+               <Link to="/react-spa/home">Home</Link>
             </li>
             <li>
-               <Link to="/infinite">Infinite</Link>
+               <Link to="/react-spa/infinite">Infinite</Link>
             </li>
             <li>
-               <Link to="/contacts">Contact</Link>
+               <Link to="/react-spa/contacts">Contact</Link>
             </li>
             <li>
                <a href="#" style={{textDecoration: 'underline'}} onClick={(event) => logout(event)}>Logout</a>
